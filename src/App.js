@@ -1,23 +1,25 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useState, useEffect } from "react";
+import { getContacts } from "./api";
+import ContactForm from "./components/ContactForm";
+import ContactList from "./components/ContactList";
 
 function App() {
+  const [contacts, setContacts] = useState([]);
+
+  const fetchContacts = async () => {
+    const res = await getContacts();
+    setContacts(res.data);
+  };
+
+  useEffect(() => {
+    fetchContacts();
+  }, []);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <h1>Contact Manager</h1>
+      <ContactForm fetchContacts={fetchContacts} />
+      <ContactList contacts={contacts} fetchContacts={fetchContacts} />
     </div>
   );
 }
