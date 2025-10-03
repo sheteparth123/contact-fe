@@ -1,7 +1,7 @@
 import axios from "axios";
 
 // Backend URL (use localhost for dev)
-const API_BASE_URL = "http://localhost:8080/api/contacts";
+const API_BASE_URL = "https://contact-be-production.up.railway.app/api/contacts";
 
 export const getContacts = () => axios.get(API_BASE_URL);
 export const addContact = (contact) => axios.post(API_BASE_URL, contact);
